@@ -82,7 +82,7 @@ class Hand:
                 num_A.append(c)
         for i in num_A:
             val = str(input("Change an A from 11 points to 1 point? (Y or N): "))
-            print val + "AAAAAAA"
+            print (val + "AAAAAAA")
             if val != "Y" and val != "N":
                 print ("Please answer with Y or N")
             elif val == "Y":
@@ -114,10 +114,10 @@ def blackjack(num):
     while counter < len(players):
         for player in range(len(players)):
             if players[player].sum_cards() < 21 and players[player].get_done():
-                print ("Player " + str(player + 1) + ", your cards are " + str(players[player].print_cards())) + ", Total is " + str(players[player].sum_cards())
+                print ("Player " + str(player + 1) + ", your cards are " + str(players[player].print_cards()) + ", Total is " + str(players[player].sum_cards()))
                 ask_for_card = True
                 while ask_for_card:
-                    name = raw_input("Hit? (Y or N): ")
+                    name = input("Hit? (Y or N): ")
                     if name != "Y" and name != "N":
                         print ("Please answer with Y or N\n")
                     elif name == "Y":
@@ -148,5 +148,3 @@ def blackjack(num):
             max_index = player
 
     print ("The Winner is Player " + str(max_index + 1) + " with " + str(max_val) + " points!")
-
-print (blackjack(5))
