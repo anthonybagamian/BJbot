@@ -25,7 +25,9 @@ async def on_message(message):
     #.message.content is content of message
     if message.content == "cookie":
         #respond in channel that the message was given (command trigger)
-        await message.channel.send("black jack")
+        await message.channel.send(":cookie:")
+    if message.content == "blackjack":
+        await message.channel.send("lets play blackjack")
 
 #tells client what bot to use (login information)
 client.run("NDkwMzQ1MzcwNTEwMTYzOTY5.Dn7EbQ.JkjrpApmhu6E7lcee4oNT_lP5Ho")
