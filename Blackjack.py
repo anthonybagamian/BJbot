@@ -117,7 +117,7 @@ def blackjack(num):
                 print ("Player " + str(player + 1) + ", your cards are " + str(players[player].print_cards())) + ", Total is " + str(players[player].sum_cards())
                 ask_for_card = True
                 while ask_for_card:
-                    name = str(input("Hit? (Y or N): "))
+                    name = raw_input("Hit? (Y or N): ")
                     if name != "Y" and name != "N":
                         print ("Please answer with Y or N\n")
                     elif name == "Y":
