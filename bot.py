@@ -4,8 +4,11 @@ from discord.ext import commands
 import asyncio
 import time
 
-client = discord.Client()
 
+
+client = discord.Client()
+Blackjack = False
+players = 0
 
 #client = commands.Bot(command_prefix='$')
 
@@ -23,11 +26,21 @@ async def on_ready():
 async def on_message(message):
     print('!!!')
     #.message.content is content of message
-    if message.content == "cookie":
+    if message.content == "!Blackjack":
         #respond in channel that the message was given (command trigger)
-        await message.channel.send(":cookie:")
-    if message.content == "blackjack":
-        await message.channel.send("lets play blackjack")
+        await message.channel.send("Type 1 to play, Type 2 to start, Type 0 to end Blackjack")
+        Blackjack = True
+    if message.content == ("1") and Blackjack == True:
+        players += 1
+    if message.content ==("2") and Blackjack == True:
+        players = str(players)
+        await message.channel.send("Blackjack is starting. Cards are in DMs. " + players + "in game.")
+    
+
+
+
+
+
 
 #tells client what bot to use (login information)
 client.run("NDkwMzQ1MzcwNTEwMTYzOTY5.Dn7EbQ.JkjrpApmhu6E7lcee4oNT_lP5Ho")
