@@ -99,7 +99,7 @@ class Hand:
     def get_done(self):
         return self.not_done
 
-def blackjack(num):
+def blackjack():
     deck = Deck()
     dealer_cards = Hand()
     dealer_cards.add_card(deck.draw(2))
@@ -174,4 +174,4 @@ def blackjack(num):
 
     print ("\nScores: You: " + str(player_sum) + " vs. Dealer: " + str(dealer_sum) + "\n\n")
 
-blackjack(5)
+blackjack()
