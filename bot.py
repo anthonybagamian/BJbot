@@ -2,13 +2,13 @@ import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
 import asyncio
+from Blackjack import *
 import time
 
 
 
 client = discord.Client()
-Blackjack = False
-players = 0
+
 
 #client = commands.Bot(command_prefix='$')
 
@@ -24,18 +24,25 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print('!!!')
+    Blackjack = False
     #.message.content is content of message
     if message.content == "!Blackjack":
         #respond in channel that the message was given (command trigger)
-        await message.channel.send("Type 1 to play, Type 2 to start, Type 0 to end Blackjack")
+        await message.channel.send("Type 1 to play, !blackjackstart to start, Type 0 to end Blackjack")
         Blackjack = True
-    if message.content == ("1") and Blackjack == True:
-        players += 1
-    if message.content ==("2") and Blackjack == True:
-        players = str(players)
-        await message.channel.send("Blackjack is starting. Cards are in DMs. " + players + "in game.")
-    
+    elif message.content == ("!blackjackstart"):
+        await message.author.Blackjack.send("card")
+
+
+    #     players += 1
+    # print (players)
+
+# @client.event
+# async def start_blackjack(message):
+#     # on_message("!Blackjack")
+#     if message.content == "!blackjackstart":
+#         # players = str(players)
+
 
 
 
