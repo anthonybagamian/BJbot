@@ -116,15 +116,6 @@ class Hand:
     def get_cards(self):
         return self.deck
 
-global deck, dealer_cards, players, player_cards
-deck = Deck()
-dealer_cards = Hand()
-dealer_cards.add_card(deck.draw(2))
-players = [dealer_cards]
-
-player_cards = Hand()
-player_cards.add_card(deck.draw(2))
-players.append(player_cards)
 #handles all events
 #event is when something happens which triggers something else to happen
 @client.event
@@ -137,9 +128,17 @@ async def on_ready():
 @client.event
 async def on_message(message):
     #.message.content is content of message
-    if message.content == "!Blackjack":
+    if message.content == "!blackjack":
         #respond in channel that the message was given (command trigger)
-        print ("Hello " + str(deck))
+        global deck, dealer_cards, players, player_cards
+        deck = Deck()
+        dealer_cards = Hand()
+        dealer_cards.add_card(deck.draw(2))
+        players = [dealer_cards]
+
+        player_cards = Hand()
+        player_cards.add_card(deck.draw(2))
+        players.append(player_cards)
         await message.author.send("Blackjack starting, type !dealcards to see cards")
     elif message.content == ("!dealcards"):
         # DEALER CODE
@@ -158,7 +157,7 @@ async def on_message(message):
             else:
                 await message.author.send("You tied! Type !Score to see your score")
         else:
-            await message.author.send("Your cards are " + player_cards.print_cards() + ", Total Score: " + str(player_cards.sum_cards()) + "\nDealer has " + players[1].dealer_print() + "\nType !Yes to hit and !No to stay")
+            await message.author.send("Your cards are " + player_cards.print_cards() + ", Total Score: " + str(player_cards.sum_cards()) + "\nDealer has " + players[0].dealer_print() + "\nType !Yes to hit and !No to stay")
     elif message.content == ("!No"):
         player_sum = players[1].sum_cards()
         dealer_sum = players[0].sum_cards()
@@ -183,14 +182,14 @@ async def on_message(message):
                 players[1].done()
                 await message.author.send("Bust! You lose! Type !Score to see score")
         elif sum == 21 and len(players[1].get_cards()) == 2:
-            await message.author.send("BLACKJACK! Type _____ to see score")
+            await message.author.send("BLACKJACK! Type !Score to see score")
             players[1].done()
         elif sum < 21:
             await message.author.send("Your cards are " + player_cards.print_cards() + ", Total Score: " + str(player_cards.sum_cards()) + "\nDealer has " + players[1].dealer_print() + "\nType !Yes to hit and !No to stay")
     elif message.content == ("!Score"):
         player_sum = players[1].sum_cards()
         dealer_sum = players[0].sum_cards()
-        await message.author.send("Scores: You: " + str(player_sum) + " vs. Dealer: " + str(dealer_sum) + "\n")
+        await message.author.send("Scores: You: " + str(player_sum) + " vs. Dealer: " + str(dealer_sum) + "\nType !blackjack to play again")
 
 
 
