@@ -2,7 +2,7 @@ import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
 import asyncio
-from Blackjack import *
+# from blackjack_simple.py import *
 import time
 
 
@@ -29,10 +29,10 @@ async def on_message(message):
     if message.content == "!Blackjack":
         #respond in channel that the message was given (command trigger)
         await message.channel.send("Type 1 to play, !blackjackstart to start, Type 0 to end Blackjack")
-        Blackjack = True
+
     elif message.content == ("!blackjackstart"):
-        await message.author.Blackjack.send("")
-        player += 1
+        await message.author.send("hvjv")
+        await message.author.send(add())
 
 
 
