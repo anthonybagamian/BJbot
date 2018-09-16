@@ -101,6 +101,8 @@ class Hand:
 
     def get_cards(self):
         return self.deck
+def add():
+    return 5+6
 
 def blackjack():
     deck = Deck()
