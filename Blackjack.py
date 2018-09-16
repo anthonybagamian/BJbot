@@ -69,6 +69,9 @@ class Hand:
             sum += card.get_points()
         return sum
 
+    def dealer_print(self):
+        return self.deck[0].string()
+
     def print_cards(self):
         ret_str = ""
         for card in self.deck:
@@ -81,8 +84,7 @@ class Hand:
             if self.deck[c].get_value() == "A" and self.deck[c].get_points() == 11:
                 num_A.append(c)
         for i in num_A:
-            val = str(input("Change an A from 11 points to 1 point? (Y or N): "))
-            print val + "AAAAAAA"
+            val = str(raw_input("Change an A from 11 points to 1 point? (Y or N): "))
             if val != "Y" and val != "N":
                 print ("Please answer with Y or N")
             elif val == "Y":
@@ -98,23 +100,45 @@ class Hand:
 
 def blackjack(num):
     deck = Deck()
-    players = []
+    # I EDITED THIS SHIT HERE ALL THE WAY TO...
+    dealer_cards = Hand()
+    dealer_cards.add_card(deck.draw(2))
+    players = [dealer_cards]
+    # HERE
+
     players_done = []
-    for player in range(0, num):
+    for player in range(1, num + 1):
         player_cards = Hand()
         player_cards.add_card(deck.draw(2))
         players.append(player_cards)
 
         # Here you would dm each player their cards
-        print ("Player " + str(player + 1) + "'s cards are " + player_cards.print_cards())
+        print ("Player " + str(player) + "'s cards are " + player_cards.print_cards())
+        # GOT RID OF THE + 1 ^^^^^ (e.g. str(player + 1) --> str(player))
 
     print ("")
 
-    counter = 0
+    # ADDED THIS LINE
+    print ("Dealer has " + players[1].dealer_print() + "\n")
+
+    counter = 1
+
+    # DEALER CODE
+    sum = -1
+    while players[0].not_done:
+        sum = players[0].sum_cards()
+        print "DEALER SUM: " + str(sum)
+        if sum >= 17:
+            players[0].done()
+        else:
+            players[0].add_card(deck.draw(1))
+
     while counter < len(players):
         for player in range(len(players)):
             if players[player].sum_cards() < 21 and players[player].get_done():
-                print ("Player " + str(player + 1) + ", your cards are " + str(players[player].print_cards())) + ", Total is " + str(players[player].sum_cards())
+                print ("Player " + str(player) + ", your cards are " + str(players[player].print_cards())) + ", Total is " + str(players[player].sum_cards())
+                # GOT RID OF THE + 1 ^^^^^ (e.g. str(player + 1) --> str(player))
+
                 ask_for_card = True
                 while ask_for_card:
                     name = raw_input("Hit? (Y or N): ")
@@ -131,7 +155,10 @@ def blackjack(num):
                             if sum > 21:
                                 counter += 1
                                 players[player].done()
-                                print ("You lose!")
+                                print ("Bust!")
+                        if sum == 21:
+                            counter += 1
+                            players[player].done()
                         ask_for_card = False
                     else:
                         players_done.append(players[player])
@@ -140,13 +167,18 @@ def blackjack(num):
                         ask_for_card = False
                     print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-    max_val = -1
-    max_index = -1
+    # THIS SHIT HAS BEEN changed down here mans
     for player in range(len(players_done)):
-        if int(players_done[player].sum_cards()) > max_val:
-            max_val = players_done[player].sum_cards()
-            max_index = player
+        if player != 0:
+            player_sum = players_done[player].sum_cards()
+            dealer_sum = players_done[0].sum_cards()
+            if player_sum > 21 or player_sum < dealer_sum:
+                print ("Player " + str(player) + " loses to dealer...")
+            elif player_sum > dealer_sum:
+                print ("Player " + str(player) + " beats the dealer!")
+            elif player_sum == dealer_sum:
+                print ("Player " + str(player) + " ties with the dealer!")
 
-    print ("The Winner is Player " + str(max_index + 1) + " with " + str(max_val) + " points!")
+            print ("\nScores: Player " + str(player) + ": " + str(player_sum) + " vs. Dealer: " + str(dealer_sum) + "\n\n")
 
-print (blackjack(5))
+blackjack(5)
