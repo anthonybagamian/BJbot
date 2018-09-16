@@ -24,14 +24,14 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    Blackjack = False
     #.message.content is content of message
     if message.content == "!Blackjack":
         #respond in channel that the message was given (command trigger)
-        await message.channel.send("Type 1 to play, !blackjackstart to start, Type 0 to end Blackjack")
+        await message.author.send("Blackjack starting")
 
-    elif message.content == ("!blackjackstart"):
+    elif message.content == ("!dealcards"):
         await message.author.send("hvjv")
+
         await message.author.send(add())
 
 

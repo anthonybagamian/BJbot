@@ -137,7 +137,7 @@ def blackjack():
     while counter < len(players):
         player = 1
         if players[player].sum_cards() < 21 and players[player].get_done():
-            print ("Your cards are " + str(players[player].print_cards()) + ", Total is " + str(players[player].sum_cards())
+            print ("Your cards are " + str(players[player].print_cards()) + ", Total is " + str(players[player].sum_cards()))
             # GOT RID OF THE + 1 ^^^^^ (e.g. str(player + 1) --> str(player))
 
             ask_for_card = True
