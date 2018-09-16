@@ -96,6 +96,9 @@ class Hand:
     def get_done(self):
         return self.not_done
 
+    def get_cards(self):
+        return self.deck
+
 def blackjack(num):
     deck = Deck()
     players = []
