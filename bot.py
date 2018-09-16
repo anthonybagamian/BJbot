@@ -28,13 +28,13 @@ async def on_message(message, Blackjack, players):
     #.message.content is content of message
     if message.content == "!Blackjack":
         #respond in channel that the message was given (command trigger)
-        message.channel.send("Type 1 to play, Type 2 to start, Type 0 to end Blackjack")
-        Blackjack = True
+        await message.channel.send("Type 1 to play, Type 2 to start, Type 0 to end Blackjack")
+        await Blackjack = True
     if message.content == "1" and Blackjack == True:
-        players += 1
+        await players += 1
     if message.content == "2" and Blackjack == True:
-        players = str(players)
-        await message.channel.send("Blackjack is starting. Cards are in DMs. " + players + "in game.")
+        await players = str(players)
+        await message.channel.send("Blackjack is starting. Cards are in DMs. " + players + " in game.")
 
 
 
