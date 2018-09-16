@@ -84,7 +84,12 @@ class Hand:
             if self.deck[c].get_value() == "A" and self.deck[c].get_points() == 11:
                 num_A.append(c)
         for i in num_A:
+<<<<<<< HEAD
+            val = str(input("Change an A from 11 points to 1 point? (Y or N): "))
+            print (val + "AAAAAAA")
+=======
             val = str(raw_input("Change an A from 11 points to 1 point? (Y or N): "))
+>>>>>>> 3a3594ef034655d683c2b389d7df536195697136
             if val != "Y" and val != "N":
                 print ("Please answer with Y or N")
             elif val == "Y":
@@ -136,12 +141,16 @@ def blackjack(num):
     while counter < len(players):
         for player in range(len(players)):
             if players[player].sum_cards() < 21 and players[player].get_done():
+<<<<<<< HEAD
+                card = ("Player " + str(player + 1) + ", your cards are " + str(players[player].print_cards())) + ", Total is " + str(players[player].sum_cards())
+=======
                 print ("Player " + str(player) + ", your cards are " + str(players[player].print_cards())) + ", Total is " + str(players[player].sum_cards())
                 # GOT RID OF THE + 1 ^^^^^ (e.g. str(player + 1) --> str(player))
 
+>>>>>>> 3a3594ef034655d683c2b389d7df536195697136
                 ask_for_card = True
                 while ask_for_card:
-                    name = raw_input("Hit? (Y or N): ")
+                    name = input("Hit? (Y or N): ")
                     if name != "Y" and name != "N":
                         print ("Please answer with Y or N\n")
                     elif name == "Y":
