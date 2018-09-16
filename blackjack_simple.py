@@ -127,9 +127,7 @@ def blackjack():
     sum = -1
     while players[0].not_done:
         sum = players[0].sum_cards()
-        print ("DEALER SUM: " + str(sum))
         if sum >= 17:
-            print ("DONE")
             players[0].done()
         else:
             players[0].add_card(deck.draw(1))
