@@ -23,6 +23,7 @@ async def on_ready():
     print(client.user.id)
 
 @client.event
+<<<<<<< HEAD
 async def on_message(message):
     Blackjack = False
     #.message.content is content of message
@@ -42,6 +43,20 @@ async def on_message(message):
 #     # on_message("!Blackjack")
 #     if message.content == "!blackjackstart":
 #         # players = str(players)
+=======
+async def on_message(message, Blackjack, players):
+    print('!!!')
+    #.message.content is content of message
+    if message.content == "!Blackjack":
+        #respond in channel that the message was given (command trigger)
+        message.channel.send("Type 1 to play, Type 2 to start, Type 0 to end Blackjack")
+        Blackjack = True
+    if message.content == "1" and Blackjack == True:
+        players += 1
+    if message.content == "2" and Blackjack == True:
+        players = str(players)
+        await message.channel.send("Blackjack is starting. Cards are in DMs. " + players + "in game.")
+>>>>>>> 3a3594ef034655d683c2b389d7df536195697136
 
 
 
